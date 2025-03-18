@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;  //this auth gives the currect user information
 
 class HomeController extends Controller
 {
@@ -78,6 +80,51 @@ class HomeController extends Controller
                 $cart= Cart::where('user_id',$userId)->get();
             }
         return view('home.mycart',compact('count','cart'));
+    }
+    public function order(Request $req)
+    {
+        $name = $req->name;
+        $add = $req ->address;
+        $phone = $req -> phone;
+        $userId = Auth::user()->id; // get current user id 
+        $cart = Cart::where('user_id',$userId)->get(); // get data from cart table by userId
+
+        foreach($cart as $carts){
+         $order = new Order();
+         $order->name = $name;
+         $order -> rec_address = $add;
+         $order ->phone = $phone;
+         $order->user_id = $userId;
+         $order->product_id = $carts->product_id;
+
+         $order->save();
+
+        }
+        $cart_remove = Cart::where('user_id',$userId)->get();
+        foreach($cart_remove as $remove){
+            $data = Cart::find($remove->id);
+                $data ->delete();
+                
+            
+        }
+
+        return redirect()->back();
+
+   
+    }
+    public function cart_delay($id){
+        $data = Cart::find($id);
+        $data->delete();
+        toastr()->success('Successfully deleted a product ');
+        return redirect()->back();
+
+    }
+
+    public function pdf($id){
+        $data = Order::find($id);
+        $pdf = Pdf::loadView('admin.invoice',compact('data'));
+        return $pdf->download('cash memo.pdf');
+        // return view('admin.invoice',compact('data'));
     }
   
 }

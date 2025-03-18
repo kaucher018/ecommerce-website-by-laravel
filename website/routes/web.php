@@ -22,6 +22,11 @@ route::get('adminview',[HomeController::class,'index'])->middleware(['auth','adm
 
 route::get('view_catagory',[AdminController::class,'view_catagory'])->middleware(['auth','admin']);
 
+route::get('view_order',[AdminController::class,'view_order'])->middleware(['auth','admin']);
+
+route::get('onway/{id}',[AdminController::class,'onway'])->middleware(['auth','admin']);
+route::get('delivered/{id}',[AdminController::class,'delivered'])->middleware(['auth','admin']);
+
 route::post('add_catagory',[AdminController::class,'add_catagory'])->middleware(['auth','admin']);
 route::get('delete_cat/{id}',[AdminController::class,'delete_cat'])->middleware(['auth','admin']);
 route::get('edit_cat/{id}',[AdminController::class,'edit_cat'])->middleware(['auth','admin']);
@@ -39,3 +44,6 @@ route::get('pro_search',[AdminController::class,'pro_search'])->middleware(['aut
 route::get('product_det/{id}',[HomeController::class,'product_det']);
 route::get('add_cart/{id}',[HomeController::class,'add_cart'])->middleware(['auth', 'verified']);
 route::get('mycart',[HomeController::class,'mycart'])->middleware(['auth', 'verified']);
+route::post('order',[HomeController::class,'order'])->middleware(['auth', 'verified']);
+route::get('cart_delay/{id}',[HomeController::class,'cart_delay'])->middleware(['auth', 'verified']);
+route::get('pdf/{id}',[HomeController::class,'pdf'])->middleware(['auth', 'verified']);

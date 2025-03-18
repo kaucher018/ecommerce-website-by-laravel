@@ -22,7 +22,7 @@
                   <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <li><a href="{{url('add_product')}}">Add product</a></li>
                     <li><a href="{{url('view_product')}}">View Products</a></li>
-                    <li><a href="#">Page</a></li>
+                    <li><a href="{{url('view_order')}}">Product orders</a></li>
                   </ul>
                 </li>
                 <li><a href="login.html"> <i class="icon-logout"></i>Login page </a></li>

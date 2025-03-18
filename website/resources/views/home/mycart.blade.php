@@ -45,9 +45,7 @@
     <!-- slider section -->
 
   
-<div>
 
-</div>
 
 <table border="1" class="table">
    
@@ -55,10 +53,14 @@
         <th>added product</th>
         <th>Price</th>
         <th>image</th>
+        <th>Delay</th>
     </tr>
     <?php
 $value =0;
     ?>
+
+
+    
      @foreach($cart as $cart)
 <tr>
     <td>
@@ -69,6 +71,9 @@ $value =0;
     </td>
     <td>
         <img width="50px" src="/products/{{$cart->product->image}}" alt="">
+    </td>
+    <td>
+      <a href="{{url('cart_delay',$cart->id)}}" class="btn btn-danger">Remove</a>
     </td>
     <?php
     
@@ -82,7 +87,24 @@ $value =0;
     
 <h4 class="table">Total cost :{{$value}}</h4>
 
-
+<div class="table">
+  <div class="table"  style="margin-bottom: 10px;">
+  Confim order
+</div>
+<form action="{{url('order')}}" method="post" style="padding: 10px">
+  @csrf 
+  <label for="name">User name</label>
+  <input type="text" name="name" value="{{Auth::user()->name}}">
+  <br>
+  <label for="address">User Address</label>
+  <input type="text" name="address" value="{{Auth::user()->address}}">
+  <br>
+  <label for="phone">User phone</label>
+  <input type="text" name="phone" value="{{Auth::user()->phone}}">
+  <br>
+  <input type="submit" class="btn btn-primary">
+</form>
+</div>
 
   <!-- contact section -->
 

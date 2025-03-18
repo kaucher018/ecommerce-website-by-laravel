@@ -29,138 +29,110 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-<style>
-        .table{
+        <style>
+        .center{
             width: 69%;
             margin: auto;
             align-items: center;
             margin-top: 50px;
-            border:2px solid yellowgreen;
             text-align: center;
-          }
-          h2{
-            width: 69%;
-            margin: auto;
-            align-items: center;
-            margin-top: 50px;
-           color: white;
-            text-align: center;
+            position: relative;
+            left: 50%;
+            
           }
           th{
-            background-color:skyblue;
-            padding: 15px;
-            font-size: 15px;
-            font-weight: bold;
-            color: white;
-
-          }
-          tr{
-            color: white;
-           padding: 10px;
-           border: 1px solid white;
+            color: aqua;
           }
           td{
-            border:1px solid skyblue;
             color: white;
-            text-align: center;
           }
-          .center{
-            width: 69%;
-            margin: auto;
-            align-items: center;
-            margin-top: 50px;
-            text-align: center;
-            position: relative;
-            left: 45%;
-          }
-          .cen{
-            width: 69%;
-            margin: auto;
-            align-items: center;
-            margin-top: 50px;
-            text-align: center;
-            position: relative;
-            left: 20%;
-          }
-</style>
-
-
+          </style>
   </head>
   <body>
   @include('admin.header')
-
- 
 
     @include('admin.sidebar')
       <!-- Sidebar Navigation end-->
       <div class="page-content">
         <div class="page-header">
           <div class="container-fluid">
-           
- <h2>All product List</h2>
-
- 
-<form action="{{url('pro_search')}}" method="get" class="cen">
-<input type="search" name="search" id="" value="{{@$search}}">
-<input type="submit" value="search" class="btn btn-success">
-</form>
+           <div>
+           <table class="table">
 
 
-<table class="table">
+<tr>
+    <th>
+        Costomer name
+    </th>
+    <th>
+        Location
+    </th>
+    <th>
+        Phone
+    </th>
+    <th>
+       Product
+    </th>
+    <th>
+        price
+    </th>
+    <th>
+        image
+    </th>
+    <th>
+        Status
+    </th>
+    <th>
+        Change Status
+    </th>
+    <th>
+      Download PDF
+    </th>
+   
+</tr>
+@foreach($data as $datas)
+<tr>
+    <td>{{$datas->name}}</td>
+    <td>{{$datas->rec_address}}</td>
+    <td>{{$datas->phone}}</td>
+    <td>{{$datas->product->title}}</td>
+    <td>{{$datas->product->title}}</td>
+    <td>
+        <img width="50px" src="products/{{$datas->product->image}}" alt="">
+    </td>
+   
+   
+    <td>
+       @if(($datas->sts) == 'In progress')
+      <span style="color: red;">{{$datas->sts}}</span></td>
+    
+      @elseif(($datas->sts) == 'On the way')
+      <span style="color: blue;">{{$datas->sts}}</span></td>
 
-
-    <tr>
-        <th>
-            Product name
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Price
-        </th>
-        <th>
-           Quantity
-        </th>
-        <th>
-            Catagory
-        </th>
-        <th>
-            image
-        </th>
-        <th>
-          Oparations
-      </th>
-    </tr>
-    @foreach($product as $products)
-    <tr>
-        <td>{{$products->title}}</td>
-        <td>{!!Str::limit($products->description,5)!!}</td>
-        <td>{{$products->price}}</td>
-        <td>{{$products->quantity}}</td>
-        <td>{{$products->catagory}}</td>
-        <td>
-            
-        <img height="70px" width="70px" src="products/{{$products->image}}" alt="No image">
-        </td>
-        <td>
-          <a class="btn btn-success" href="{{url('edit_pro',$products->id)}}">Edit</a>
-          <a class="btn btn-danger" href="{{url('del_pro',$products->id)}}">Delete</a>
-          
-        </td>
-    </tr>
-    @endforeach
+      @else(($datas->sts) == 'Delivered')
+      <span style="color: green;">{{$datas->sts}}</span></td>
+      @endif
+      
+    <td>
+        <a href="{{url('onway',$datas->id)}}" class="btn btn-primary"> On the way</a>
+        <a href="{{url('delivered',$datas->id)}}" class="btn btn-success"> Delivered</a>
+    </td>
+    <td>
+      <a href="{{url('pdf',$datas->id)}}">Download</a>
+    </td>
+    
+   
+</tr>
+@endforeach
 </table>
 
+
 <div class="center">
-  {{$product->onEachSide(1)->links()}}
+  {{$data->onEachSide(1)->links()}}
 </div>
 
+           </div>
       </div>
-
-    
-
-
     </div>
     <!-- JavaScript files-->
     <script src="{{asset('/admincss/vendor/jquery/jquery.min.js')}}"></script>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Catagory;
 use App\Models\Product;
+use App\Models\Order;
+
 
 class AdminController extends Controller
 {
@@ -128,6 +130,27 @@ if($img){
     $product = Product::where('title','LIKE','%'.$search.'%')->orwhere('catagory','LIKE','%'.$search.'%')->paginate(3);
 
     return view('admin.view_product',compact('product','search'));
+
+   }
+
+   public function view_order(){
+    $data = Order::paginate(5);
+
+    return view('admin.order',compact('data'));
+   }
+
+   public function onway($id){
+    $data = Order::find($id);
+    $data->sts = "On the way";
+    $data->save();
+    return redirect()->back();
+   }
+
+   public function delivered($id){
+    $data = Order::find($id);
+    $data->sts = "Delivered";
+    $data->save();
+    return redirect()->back();
 
    }
 
