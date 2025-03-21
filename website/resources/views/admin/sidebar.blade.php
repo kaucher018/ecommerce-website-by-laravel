@@ -11,7 +11,7 @@
         </div>
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
         <ul class="list-unstyled">
-                <li class="active"><a href="{{url('/dashboard')}}"> <i class="icon-home"></i>Home </a></li>
+                <li ><a href="{{url('adminview')}}"> <i class="icon-home"></i>Home </a></li>
                 <li>
                     <a href="{{url('view_catagory')}}"> <i class="icon-grid"></i>Catagory </a>
                 </li>

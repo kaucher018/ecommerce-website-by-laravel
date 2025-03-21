@@ -118,7 +118,7 @@
         <a href="{{url('delivered',$datas->id)}}" class="btn btn-success"> Delivered</a>
     </td>
     <td>
-      <a href="{{url('pdf',$datas->id)}}">Download</a>
+      <a href="{{url('pdf',$datas->id)}}" class="btn btn-primary">Download</a>
     </td>
     
    

@@ -102,7 +102,8 @@ $value =0;
   <label for="phone">User phone</label>
   <input type="text" name="phone" value="{{Auth::user()->phone}}">
   <br>
-  <input type="submit" class="btn btn-primary">
+  <input type="submit" class="btn btn-primary" value="Cash on delivery">
+  <a href="{{url('stripe')}}" class="btn btn-success"> Payment on card</a>
 </form>
 </div>
 
@@ -111,6 +112,9 @@ $value =0;
   @include('home.contact')
 
   <!-- end contact section -->
+
+
+  
 
    
 

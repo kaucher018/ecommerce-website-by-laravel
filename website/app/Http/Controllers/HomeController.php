@@ -8,31 +8,44 @@ use App\Models\User;
 use App\Models\Cart;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Session;
+use Stripe;
 
 use Illuminate\Support\Facades\Auth;  //this auth gives the currect user information
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('admin.index');
+        $user = User::where('usertype','user')->get()->count();
+        $product = Product::all()->count();
+        $order = Order::all()->count();
+        $deliver = Order::where('sts','Delivered')->get()->count();
+        
+        return view('admin.index',compact('user','product','order','deliver'));
     }
     public function home(){
+        $product = Product::all();
+        $count=0;
+        $orderCount=0;
+        if (Auth::id()) {
+                $userId = Auth::user()->id;
+                $count = Cart::where('user_id', $userId)->count();
+                $orderCount = Order::where('user_id',$userId)->count();
+            }
+        // $user = Auth::user();
+        // $userid= $user->id;
+        // $count = Cart::where('user_id', $userid)->count();
+        return view('home.index',compact('product','count','orderCount'));
+    }
+    public function login(){
         $product = Product::all();
         $count=0;
         if (Auth::id()) {
                 $userId = Auth::user()->id;
                 $count = Cart::where('user_id', $userId)->count();
+                $orderCount = Order::where('user_id',$userId)->count();
             }
-        // $user = Auth::user();
-        // $userid= $user->id;
-        // $count = Cart::where('user_id', $userid)->count();
-        return view('home.index',compact('product','count'));
-    }
-    public function login(){
-        $product = Product::all();
-        $user = Auth::user();
-        $userid= $user->id;
-        $count = Cart::where('user_id', $userid)->count();
+       
        
         
 
@@ -41,7 +54,7 @@ class HomeController extends Controller
         //     $count = Cart::where('user_id', $userId)->count();
         // }
 
-        return view('home.index',compact('product','count'));
+        return view('home.index',compact('product','count','orderCount'));
 
     }
     public function product_det($id){
@@ -50,8 +63,10 @@ class HomeController extends Controller
         if (Auth::id()) {
                 $userId = Auth::user()->id;
                 $count = Cart::where('user_id', $userId)->count();
+                $orderCount = Order::where('user_id',$userId)->count();
+                
             }
-        return view('home.product_details',compact('product','count'));
+        return view('home.product_details',compact('product','count','orderCount'));
 
     }
 
@@ -74,12 +89,14 @@ class HomeController extends Controller
     }
     public function mycart(){
         $count=0;
+        $orderCount =0;
         if (Auth::id()) {
                 $userId = Auth::user()->id;
                 $count = Cart::where('user_id', $userId)->count();
                 $cart= Cart::where('user_id',$userId)->get();
+                $orderCount = Order::where('user_id',$userId)->count();
             }
-        return view('home.mycart',compact('count','cart'));
+        return view('home.mycart',compact('count','cart','orderCount'));
     }
     public function order(Request $req)
     {
@@ -100,6 +117,7 @@ class HomeController extends Controller
          $order->save();
 
         }
+
         $cart_remove = Cart::where('user_id',$userId)->get();
         foreach($cart_remove as $remove){
             $data = Cart::find($remove->id);
@@ -107,6 +125,7 @@ class HomeController extends Controller
                 
             
         }
+        toastr()->closeOnHover(true)->success('Order Done');
 
         return redirect()->back();
 
@@ -125,6 +144,39 @@ class HomeController extends Controller
         $pdf = Pdf::loadView('admin.invoice',compact('data'));
         return $pdf->download('cash memo.pdf');
         // return view('admin.invoice',compact('data'));
+    }
+    public function myorder(){
+        $userId = Auth::user()->id;
+        $count = Cart::where('user_id', $userId)->count();
+        $order = Order::where('user_id',$userId)->get();
+        $orderCount = Order::where('user_id',$userId)->count();
+        return view('home.myorder',compact('count','order','orderCount'));
+    }
+    public function cancle_order($id){
+        $data = Order::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+    public function stripe()
+    {
+        return view('home.stripe');
+    }
+
+    public function stripePost(Request $request)
+    {
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+    Stripe\Charge::create ([
+
+                "amount" => 100 * 100,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "Test payment from itsolutionstuff.com." 
+        ]);
+
+        Session::flash('success', 'Payment successful!');
+        return back();
+
     }
   
 }

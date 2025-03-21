@@ -47,3 +47,14 @@ route::get('mycart',[HomeController::class,'mycart'])->middleware(['auth', 'veri
 route::post('order',[HomeController::class,'order'])->middleware(['auth', 'verified']);
 route::get('cart_delay/{id}',[HomeController::class,'cart_delay'])->middleware(['auth', 'verified']);
 route::get('pdf/{id}',[HomeController::class,'pdf'])->middleware(['auth', 'verified']);
+route::get('myorder',[HomeController::class,'myorder'])->middleware(['auth', 'verified']);
+route::get('cancle_order/{id}',[HomeController::class,'cancle_order'])->middleware(['auth', 'verified']);
+
+
+Route::controller(HomeController::class)->group(function(){
+
+    Route::get('stripe', 'stripe');
+
+    Route::post('stripe', 'stripePost')->name('stripe.post');
+
+});

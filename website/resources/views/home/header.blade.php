@@ -43,6 +43,9 @@
           <a href="{{url('mycart')}}">
               <i class="fa fa-shopping-bag" aria-hidden="true"></i>{{$count}}
             </a>
+            <a href="{{url('myorder')}}">
+              Myorder 
+            </a>
             <form class="form-inline ">
               <button class="btn nav_search-btn" type="submit">
                 <i class="fa fa-search" aria-hidden="true"></i>
