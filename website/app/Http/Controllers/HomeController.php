@@ -19,7 +19,7 @@ class HomeController extends Controller
         $user = User::where('usertype','user')->get()->count();
         $product = Product::all()->count();
         $order = Order::all()->count();
-        $deliver = Order::where('sts','Delivered')->get()->count();
+        $deliver = Order::where('stutas','Delivered')->get()->count();
         
         return view('admin.index',compact('user','product','order','deliver'));
     }
@@ -65,6 +65,8 @@ class HomeController extends Controller
                 $count = Cart::where('user_id', $userId)->count();
                 $orderCount = Order::where('user_id',$userId)->count();
                 
+            }else{
+                $orderCount=0;
             }
         return view('home.product_details',compact('product','count','orderCount'));
 

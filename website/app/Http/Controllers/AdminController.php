@@ -141,14 +141,14 @@ if($img){
 
    public function onway($id){
     $data = Order::find($id);
-    $data->sts = "On the way";
+    $data->stutas = "On the way";
     $data->save();
     return redirect()->back();
    }
 
    public function delivered($id){
     $data = Order::find($id);
-    $data->sts = "Delivered";
+    $data->stutas = "Delivered";
     $data->save();
     return redirect()->back();
 
