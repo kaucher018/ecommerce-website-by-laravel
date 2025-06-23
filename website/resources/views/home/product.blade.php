@@ -28,8 +28,6 @@
               </div>
                 <div>
                   <a href="{{url('product_det',$products->id)}}" class="btn btn-success">Details</a>
-
-
                    <a href="{{url('add_cart',$products->id)}}" class="btn btn-primary">Add to cart</a>
                 </div>
                 

@@ -54,15 +54,15 @@
             <div class="info_link-box">
               <a href="">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span> Gb road 123 london Uk </span>
+                <span> Shah kabir majar road,ajompur,Uttara, Dhaka </span>
               </a>
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>+01 12345678901</span>
+                <span>01845472181</span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span> demo@gmail.com</span>
+                <span> kaucherahmed@gmail.com</span>
               </a>
             </div>
           </div>
@@ -74,7 +74,7 @@
       <div class="container">
         <p>
           &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Web Tech Knowledge</a>
+          <a href="">Logeachi.com</a>
         </p>
       </div>
     </footer>

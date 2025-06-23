@@ -13,11 +13,11 @@
                     <div class="number dashtext-1">{{$user}}</div>
                   </div>
                   <div class="progress progress-template">
-                    <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
+                    <div role="progressbar" style="width: {{$user}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3 col-sm-6">
+              <a href="{{url('view_product')}}" class="col-md-3 col-sm-6">
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
@@ -26,11 +26,15 @@
                     <div class="number dashtext-2">{{$product}}</div>
                   </div>
                   <div class="progress progress-template">
-                    <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-2"></div>
+                    <div role="progressbar" style="width: {{$product}}%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-2"></div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
+</a>
+
+
+
+
+              <a href="{{url('view_order')}}" class="col-md-3 col-sm-6">
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
@@ -39,10 +43,10 @@
                     <div class="number dashtext-3">{{$order}}</div>
                   </div>
                   <div class="progress progress-template">
-                    <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
+                    <div role="progressbar" style="width: {{$order}}%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
                   </div>
                 </div>
-              </div>
+</a>
               <div class="col-md-3 col-sm-6">
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
@@ -52,7 +56,7 @@
                     <div class="number dashtext-4">{{$deliver}}</div>
                   </div>
                   <div class="progress progress-template">
-                    <div role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-4"></div>
+                    <div role="progressbar" style="width: {{$deliver}}%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-4"></div>
                   </div>
                 </div>
               </div>

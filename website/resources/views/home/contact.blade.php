@@ -11,7 +11,7 @@
         <div class="col-lg-7 col-md-6 px-0">
           <div class="map_container">
             <div class="map-responsive">
-              <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France" width="600" height="300" frameborder="0" style="border:0; width: 100%; height:100%" allowfullscreen></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.513992943872!2d90.4193683760255!3d23.8713858841195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c5c561a86bfb%3A0x53075d10aeab5fa5!2sShah+Kabir+mazar+%26+mosque!5e0!3m2!1sen!2sus!4v1750664350765!5m2!1sen!2sus" width="600" height="300" frameborder="0" style="border:0; width: 100%; height:100%" allowfullscreen></iframe>
             </div>
           </div>
         </div>

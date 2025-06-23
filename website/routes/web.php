@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UiController;
 
 Route::get('/',[HomeController::class,'home']);
 
@@ -58,3 +60,9 @@ Route::controller(HomeController::class)->group(function(){
     Route::post('stripe', 'stripePost')->name('stripe.post');
 
 });
+
+Route::get('shop', [App\Http\Controllers\ShopController::class, 'index'])->name('shop');
+Route::get('contact', [App\Http\Controllers\UiController::class, 'Contact']);
+
+Route::get('why', [App\Http\Controllers\UiController::class, 'why']);
+Route::get('testimonial', [App\Http\Controllers\UiController::class, 'testimonial']);   
